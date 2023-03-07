@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 
 from posts.models import Group, Post
-from .permissions import OrReadOnly
+from .permissions import ReadOnly
 from .serializers import CommentSerializer, GroupSerializer, PostSerializer
 
 
@@ -13,7 +13,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = (OrReadOnly,)
+    permission_classes = (ReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -22,7 +22,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    permission_classes = (OrReadOnly,)
+    permission_classes = (ReadOnly,)
     serializer_class = CommentSerializer
 
     def perform_create(self, serializer: CommentSerializer) -> None:
